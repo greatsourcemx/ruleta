@@ -1,0 +1,23 @@
+<div class="container cuerpo text-center">
+    <form ngNativeValidate #f="ngForm" class="form-signin" id="loginform" (ngSubmit)="ingresar( f )">
+        <img class="mb-4" src="../../assets/images/logotipo.svg" alt="Great Source" />
+        <h1 class="h3 mb-3 font-weight-normal">Ingresar</h1>
+        <label for="user" class="sr-only">Usuario</label>
+        <input type="text" name="user" [(ngModel)]="user.NombreUsuario" class="form-control" placeholder="Usuario" required="" autocomplete="off" />
+        <label for="clave" class="sr-only">Password</label>
+        <input type="password" name="clave" [(ngModel)]="user.Password" class="form-control" placeholder="Contraseña" required="" />
+        <!-- <div class="checkbox mb-3">
+            <label>
+              <input type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div> -->
+        <div class="login-boton">
+            <button *ngIf="!cargando" class="btn btn-lg btn-primary btn-block" type="submit">Ingresar</button>
+            <button *ngIf="cargando" class="btn btn-lg btn-primary btn-block" type="button">
+                <i class="fa fa-spin fa-spinner"></i>
+                Cargando...
+            </button>
+        </div>
+        <p class="mt-5 mb-3 text-muted">© 2018 - 2019</p>
+    </form>
+</div>

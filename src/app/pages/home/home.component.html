@@ -1,0 +1,17 @@
+<section class="jumbotron text-center fadeIn animated">
+    <div class="container">
+        <h1 class="jumbotron-heading"> {{ evento.Name }} </h1>
+        <p class="lead text-muted">Regístro de Personal para la participación en la Ruleta Navideña. En caso de no llevar la credencial, se puede registrar con el número de Empleado.</p>
+        <div class="input-group mb-3">
+            <input type="text" [(ngModel)]="player.Scan" class="form-control" placeholder="No Empleado/Credencial" aria-label="Ingresar Número de Empleado" aria-describedby="button-addon2">
+            <div class="input-group-append">
+                <button (click)="isNotInList()" class="btn btn-outline-primary" type="button" id="button-addon2"><i class="fas fa-search"></i> </button>
+            </div>
+        </div>
+        <p>
+            <a href="#" [routerLink]="['/players']" class="botones btn btn-primary my-2">Ver Participantes...</a>
+            <a href="#" [routerLink]="['/participants']" class="botones btn btn-info my-2">Confirmar Asistencia...</a>
+            <a href="#" [routerLink]="['/roulette']" class="botones btn btn-success my-2">Comenzar Sorteo <i class="fas fa-dice-six"></i></a>
+        </p>
+    </div>
+</section>

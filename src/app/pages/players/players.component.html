@@ -1,0 +1,32 @@
+<div class="card fadeIn animated">
+    <div class="card-body">
+        <div class="container">
+            <label for="find">Buscar</label>
+            <input type="text" name="find" class="form-control" placeholder="Buscar Colaborador" autocomplete="off" />
+            <hr />
+
+            <p>Participantes (<b>{{ players.length }}</b>) </p>
+            <table class="table table-sm table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let player of players">
+                        <th scope="row"> {{ player.NoEmpleado === -1 ? '' : player.NoEmpleado }} </th>
+                        <td> {{ player.Name }} </td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-secondary btn-pagination">Anterior</button>
+            <button type="button" class="btn btn-secondary btn-pagination">Siguiente</button>
+            <div class="float-right">
+                <a href="#" [routerLink]="['/home']" class="btn btn-outline-dark">Regresar</a>
+            </div>
+        </div>
+    </div>
+</div>

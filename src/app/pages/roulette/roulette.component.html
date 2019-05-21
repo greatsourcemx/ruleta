@@ -1,0 +1,64 @@
+<div class="container-fluid text-white fondo" style="background-image: url('../../assets/images/bg.png');">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h1 class="text-center"> Sorteo {{ evento?.Name }} </h1>
+        </div>
+    </div>
+    <div class="row ruleta-cuerpo" style="background-image: url('../../assets/images/Elemento1-fondo.png');">
+        <div class="col-7">
+            <div class="slots text-center" id="slots">
+                <span style="background-image: url('../../assets/images/Elemento1-front.png');"> {{ items[0] }} </span>
+                <span style="background-image: url('../../assets/images/Elemento1-front.png');"> {{ items[1] }} </span>
+                <span style="background-image: url('../../assets/images/Elemento1-front.png');"> {{ items[2] }} </span>
+                <span style="background-image: url('../../assets/images/Elemento1-front.png');"> {{ items[3] }} </span>
+                <span style="background-image: url('../../assets/images/Elemento1-front.png');"> {{ items[4] }} </span>
+            </div>
+            <div class="winner text-center">
+                <h3 *ngIf="visible" [@slideInOut]> {{ evento.CurrentWinner?.Name }} </h3>
+            </div>
+            <div class="premio text-center">
+                <h3 *ngIf="visible" [@slideInOut]> {{ evento.CurrentGift?.Name }} </h3>
+            </div>
+        </div>
+        <div class="col-1">
+            <div class="button-frame plastic" id="hitMe" name="girar" (click)="getRandom()">
+                <div class="the-button plastic"></div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="row">
+                <div class="col-md-6 text-center">
+                    <h1 class="float-md-left">Regalos <span class="badge badge-primary"> {{ evento.gifts.length }} </span></h1>
+                </div>
+                <div class="col-md-6 text-right">
+                    <button [routerLink]="['/winners']" class="btn btn-success float-md-right">Ver Ganadores</button>
+                </div>
+            </div>
+            <table class="table table-borderless table-sm">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Ganador</th>
+                        <th scope="col">Premio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr [@EnterLeave]="'flyIn'" *ngFor="let winner of evento.winners">
+                        <th scope="row"> {{ winner.id }} </th>
+                        <td> {{ winner.player.Name }}</td>
+                        <td> {{ winner.gift.Name }} </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div class="row text-white">
+        <div class="col-6">
+        </div>
+        <div class="col-6" *ngIf="visible" [@fadeAnimation]>
+            <img class="gif-image img-thumbnail" [src]="pathImage" alt="premio" />
+        </div>
+    </div>
+
+</div>

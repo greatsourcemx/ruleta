@@ -1,0 +1,23 @@
+<header class="text-center">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <!-- Navbar content -->
+        <a [routerLink]="['/home']" class="navbar-brand" href="#">
+            <img src="../../../assets/images/logotipo.svg" class="rounded mx-auto d-block" width="200" alt="Great Source">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-item nav-link" href="#">Features</a>
+                <a class="nav-item nav-link" href="#">Pricing</a>
+                <a class="nav-item nav-link disabled" href="#">Disabled</a>
+            </div>
+        </div> -->
+
+        <form class="pull-right form-inline my-2 my-lg-0">
+            <button class="btn btn-danger my-2 my-sm-0" (click)="logOut()" type="button">Salir</button>
+        </form>
+    </nav>
+</header>
