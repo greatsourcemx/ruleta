@@ -28,9 +28,10 @@
         <div class="col-4">
             <div class="row">
                 <div class="col-md-6 text-center">
-                    <h1 class="float-md-left">Regalos <span class="badge badge-primary"> {{ evento.gifts.length }} </span></h1>
+                    <h1 class="float-md-left">Regalos <span class="badge badge-primary"> {{ ( evento.gifts.length + evento.lastGifts.length) }} </span></h1>
                 </div>
                 <div class="col-md-6 text-right">
+                    <button name="btn" class="btn btn-primary margen" (click)="changeWinner()"> Cambiar Ganador </button>
                     <button [routerLink]="['/winners']" class="btn btn-success float-md-right">Ver Ganadores</button>
                 </div>
             </div>

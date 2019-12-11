@@ -23,6 +23,14 @@ export class EventsService {
     });
   }
 
+  changeWinner( evento: Evento ) {
+    const url = URL_SERVICIOS + '/event/winners';
+    return this.http.put( url, evento )
+    .map((data: Evento) => {
+      return data;
+    });
+  }
+
   loadWinners() {
     const url = URL_SERVICIOS + '/event/winners';
     return this.http.get( url );

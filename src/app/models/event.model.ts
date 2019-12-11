@@ -11,6 +11,7 @@ export class Evento {
         public players: Player[] = [],
         public CurrentWinner: Player = new Player(),
         public gifts: Gifts[] = [],
+        public lastGifts: Gifts[] = [],
         public CurrentGift: Gifts = new Gifts(),
         public winners: Winner[] = [],
         ) { }

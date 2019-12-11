@@ -1,7 +1,7 @@
 import { Component, OnInit, HostBinding } from '@angular/core';
+import { trigger,  state,  style,  animate,  transition, } from '@angular/animations';
 import { Evento } from '../../models/event.model';
 import { EventsService } from '../../services/events/events.service';
-import { trigger,  state,  style,  animate,  transition, } from '@angular/animations';
 import swal from 'sweetalert2';
 
 declare function init_rotate();
@@ -57,6 +57,7 @@ export class RouletteComponent implements OnInit {
   items: string[] = [];
   visible = false;
   pathImage = '';
+  cargando = false;
 
   constructor(public eventoService: EventsService) { }
 
@@ -79,7 +80,7 @@ export class RouletteComponent implements OnInit {
     this.eventoService.loadEvent()
     .subscribe((data: Evento) => {
       this.evento = data;
-      let i = 990;
+      let i = 99990;
       for (const play of this.evento.players) {
         if ( play.NoEmpleado === -1 ) {
           play.NoEmpleado = i;
@@ -89,20 +90,48 @@ export class RouletteComponent implements OnInit {
     });
   }
 
+  changeWinner() {
+    if ( this.cargando ) {
+      return;
+    }
+    this.cargando = true;
+    this.visible = false;
+
+    const IndexPlayer = Math.floor(Math.random() * this.evento.players.length);
+    this.evento.CurrentWinner = this.evento.players[IndexPlayer];
+    this.evento.players.splice(IndexPlayer, 1);
+    if ( this.evento.CurrentGift == null ) {
+      this.evento.CurrentGift = this.evento.winners[this.evento.winners.length - 1].gift;
+    }
+    this.pathImage = `../../../assets/images/gifts/${ this.evento.CurrentGift.Image }`;
+    // Formatea el numero de empleado ganador a 5 caracteres
+    const noWinner = this.pad(this.evento.CurrentWinner.NoEmpleado, this.items.length);
+    setTimeout(() => {
+      for (let x = 0; x < noWinner.length; x++) {
+        this.items[x] = noWinner[x];
+        this.visible = true;
+      }
+    }, 335);
+
+    this.eventoService.changeWinner( this.evento )
+        .subscribe((data: any) => {
+          this.evento.winners = data;
+          this.cargando = false;
+      });
+  }
+
   getRandom() {
+    if ( this.cargando ) {
+      return;
+    }
+    this.cargando = true;
     this.visible = false;
     if ( this.evento.gifts.length === 0  ) {
       swal( 'GAME OVER', 'No quedan premios en el sorteo', 'warning' );
     } else {
       // Busca el index del arreglo
-      let IndexGift = Math.floor(Math.random() * this.evento.gifts.length);
+      const IndexGift = Math.floor(Math.random() * this.evento.gifts.length);
       this.evento.CurrentGift = this.evento.gifts[IndexGift];
-      if ( this.evento.CurrentGift.Id === 5 && this.evento.gifts.length >= 20 ) {
-        IndexGift = Math.floor(Math.random() * this.evento.gifts.length);
-      }
-      if ( this.evento.CurrentGift.Id === 10 && this.evento.gifts.length >= 20 ) {
-        IndexGift = Math.floor(Math.random() * this.evento.gifts.length);
-      }
       const IndexPlayer = Math.floor(Math.random() * this.evento.players.length);
 
       // Selecciona el Premio y lo remueve de la lista de premios participantes
@@ -129,7 +158,14 @@ export class RouletteComponent implements OnInit {
       this.eventoService.saveWinner( this.evento )
         .subscribe((data: any) => {
           this.evento.winners = data;
-        });
+          this.cargando = false;
+      });
+      if ( this.evento.gifts.length === 0 ) {
+        for (const gif of this.evento.lastGifts ) {
+          this.evento.gifts.push( gif );
+        }
+        this.evento.lastGifts = [];
+      }
     }
   }
 
