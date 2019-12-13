@@ -128,6 +128,7 @@ export class RouletteComponent implements OnInit {
     this.visible = false;
     if ( this.evento.gifts.length === 0  ) {
       swal( 'GAME OVER', 'No quedan premios en el sorteo', 'warning' );
+      return;
     } else {
       // Busca el index del arreglo
       const IndexGift = Math.floor(Math.random() * this.evento.gifts.length);

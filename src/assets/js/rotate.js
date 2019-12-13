@@ -85,28 +85,51 @@ function init_rotate() {
                             var tries,
                                 winner;
 
-                            // elm.innerHTML = nums[inx];
-
                             // Do we have a winner
                             if (inx === slots.length - 1) {
                                 // tries = document.querySelector('#tries');
                                 // Count how many tries
                                 hitMe.counter++;
-                                // tries.innerHTML = hitMe.counter;
 
                                 if (nums[0] === nums[1] &&
-                                    nums[1] === nums[2]) {
-                                    // winner = document.querySelector('#winner');
-                                    // winner.innerHTML = '<h1>You are a Winner!!!</h1>';
+                                    nums[1] === nums[2]) {}
+                            }
+                        }, 335);
+                    }
+                }, inx * 100);
+            });
+        });
+        hitMe2 = document.querySelector('#hitMe2');
+        hitMe2.counter = 0;
 
-                                    // console.log('Got it!!! After ' + hitMe.counter + ' tries!');
-                                    // console.log(nums[0]);
-                                    // console.log(nums[1]);
-                                    // console.log(nums[2]);
+        // On button click (Enter as well)
+        hitMe2.addEventListener('click', function(e) {
+            // Get lucky numbers, range 0-9
+            var nums = getNumsFromRange(0, 9);
 
-                                    // Reset tries counter
-                                    // hitMe.counter = 0;
-                                }
+            e.preventDefault();
+
+            // Spin each slot
+            [].forEach.call(slots, function(elm, inx, arr) {
+                setTimeout(function() {
+                    // Trigger CSS transform
+                    elm.classList.toggle('spin');
+
+                    // If we have 3 lucky numbers
+                    if (Array.isArray(nums) && nums.length === 3) {
+                        // Inject the number, delay for effect
+                        setTimeout(function() {
+                            var tries,
+                                winner;
+
+                            // Do we have a winner
+                            if (inx === slots.length - 1) {
+                                // tries = document.querySelector('#tries');
+                                // Count how many tries
+                                hitMe2.counter++;
+
+                                if (nums[0] === nums[1] &&
+                                    nums[1] === nums[2]) {}
                             }
                         }, 335);
                     }
